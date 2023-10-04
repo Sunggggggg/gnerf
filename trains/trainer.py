@@ -9,6 +9,7 @@ from torch import autograd
 from torchvision.transforms import Resize
 import torch.nn.functional as F
 from torchvision import utils
+from PIL import Image
 
 from tools.utils import plot_camera_scene
 from tools.ray_utils import pose_to_d9
@@ -528,8 +529,9 @@ class Trainer(object):
         depths = torch.cat(depths)
 
         rgbs = ((rgbs.cpu().permute(0, 2, 3, 1) / 2 + 0.5).numpy().clip(0, 1) * 255).astype(np.uint8)
-        print(rgbs.shape)
+        rgbs = Image.fromarray(rgbs)
         imageio.mimwrite(os.path.join(self.video_dir, f'rgb_{self.it:04}.gif'), rgbs, duration=40)
 
         depths = (depths.cpu().permute(0, 2, 3, 1).numpy().clip(0, 1) * 255).astype(np.uint8)
+        depths = Image.fromarray(depths)
         imageio.mimwrite(os.path.join(self.video_dir, f'depth_{self.it:04}.gif'), depths, duration=40)
