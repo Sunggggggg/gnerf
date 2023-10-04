@@ -18,7 +18,7 @@ from tools.utils import count_trainable_parameters
 
 def open_tensorboard(log_dir):
     p = subprocess.Popen(
-        ["tensorboard", "--logdir", log_dir, '--bind_all', '--reload_multifile', 'True', '--load_fast', 'false']
+        ["tensorboard", "--logdir", log_dir, '--bind_all', '--reload_multifile', 'True', '--load_fast', 'false', '--host', 'localhost', '--port', '8088']
     )
 
     def killme():
@@ -177,11 +177,11 @@ if __name__ == '__main__':
     # Parallel model
     if torch.cuda.is_available() and len(deviceIds) > 1:
         print("Data parallel models")
-        generator = nn.DataParallel(generator, device_ids=deviceIds).to(device).module
-        discriminator = nn.DataParallel(discriminator, device_ids=deviceIds).to(device).module
-        inv_net = nn.DataParallel(inv_net, device_ids=deviceIds).to(device).module
-        train_pose_params = nn.DataParallel(train_pose_params, device_ids=deviceIds).to(device).module
-        val_pose_params = nn.DataParallel(val_pose_params, device_ids=deviceIds).to(device).module
+        generator = nn.DataParallel(generator, device_ids=deviceIds).to(device)
+        discriminator = nn.DataParallel(discriminator, device_ids=deviceIds).to(device)
+        inv_net = nn.DataParallel(inv_net, device_ids=deviceIds).to(device)
+        train_pose_params = nn.DataParallel(train_pose_params, device_ids=deviceIds).to(device)
+        val_pose_params = nn.DataParallel(val_pose_params, device_ids=deviceIds).to(device)
 
     print("Train start..!!!")
     trainer = Trainer(args, generator, discriminator, inv_net, train_pose_params, val_pose_params,
