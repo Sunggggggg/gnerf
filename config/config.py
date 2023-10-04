@@ -11,7 +11,7 @@ def get_opts():
     parser.add_argument('--name', type=str, default='GNeRF', help='name of the project')
 
     # training
-    parser.add_argument('--num_epoch', type=int, default=40000, help='number of training epochs')
+    parser.add_argument('--num_epoch', type=int, default=4000, help='number of training epochs')
     parser.add_argument('--num_workers', type=int, default=6, help='number of workers')
     parser.add_argument('--batch_size', type=int, default=12, help='batch size')
     parser.add_argument('--ckpt', type=str, default=None, help='pretrained checkpoint path to load')
@@ -23,7 +23,7 @@ def get_opts():
     parser.add_argument('--print_every', type=int, default=10)
     parser.add_argument('--sample_every', type=int, default=1000)
     parser.add_argument('--save_every', type=int, default=2000)
-    parser.add_argument('--video_every', type=int, default=10000)
+    parser.add_argument('--video_every', type=int, default=1000)
     parser.add_argument('--empty_cache_every', type=int, default=1000)
 
     # nerf
