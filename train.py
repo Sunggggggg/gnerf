@@ -18,7 +18,7 @@ from tools.utils import count_trainable_parameters
 
 def open_tensorboard(log_dir):
     p = subprocess.Popen(
-        ["tensorboard", "--logdir", log_dir, '--bind_all', '--reload_multifile', 'True', '--load_fast', 'false', '--host', 'localhost', '--port', '8088']
+        ["tensorboard", "--logdir", log_dir, '--reload_multifile', 'True', '--load_fast', 'false', '--host', 'localhost', '--port', '8088']
     )
 
     def killme():

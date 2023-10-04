@@ -13,5 +13,5 @@ look_at_origin: True
 pose_mode: '3d'
 
 # training
-begin_refine: 12000
-progressive_end: 20000
+begin_refine: 1200
+progressive_end: 2000
