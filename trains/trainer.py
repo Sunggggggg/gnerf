@@ -91,10 +91,10 @@ class Trainer(object):
                     img_real = self.progressvie_training(img_real)
                     val_imgs = self.progressvie_training(val_imgs_raw)
 
-                    self.generator.module.ray_sampler.update_intrinsic(self.img_wh_curr / self.img_wh_end)
+                    self.generator.ray_sampler.update_intrinsic(self.img_wh_curr / self.img_wh_end)
 
                 if self.cfg.decrease_noise:
-                    self.generator.module.decrease_noise(self.it)
+                    self.generator.decrease_noise(self.it)
 
                 self.dynamic_patch_sampler.iterations = self.it
 

@@ -70,16 +70,7 @@ def build_optimizers(model, optim_cfg, it):
 
 if __name__ == '__main__':
     args = config.load_config()
-    
-    deviceIds = ['0', '1']  # TODO : GPU Number
-    if torch.cuda.is_available() and len(deviceIds) > 0:
-        deviceIds = [int(Id) for Id in deviceIds if 0<= int(Id) < torch.cuda.device_count()]
-        print("divice Id", deviceIds)
-
-        torch.cuda.set_device(deviceIds[0])
-        device = torch.device("cuda")
-    else :
-        device = torch.device("cpu") 
+    device = torch.device("cuda")
 
     current_time = datetime.today().strftime('%Y-%m-%d-%H-%M-%S')
     args.out_dir = os.path.join(args.out_dir, "training-runs", f"{args.name}-{current_time}")
@@ -174,15 +165,6 @@ if __name__ == '__main__':
     if args.open_tensorboard:
         open_tensorboard(args.log_dir)
     
-    # Parallel model
-    if torch.cuda.is_available() and len(deviceIds) > 1:
-        print("Data parallel models")
-        generator = nn.DataParallel(generator, device_ids=deviceIds).to(device)
-        discriminator = nn.DataParallel(discriminator, device_ids=deviceIds).to(device)
-        inv_net = nn.DataParallel(inv_net, device_ids=deviceIds).to(device)
-        train_pose_params = nn.DataParallel(train_pose_params, device_ids=deviceIds).to(device)
-        val_pose_params = nn.DataParallel(val_pose_params, device_ids=deviceIds).to(device)
-
     print("Train start..!!!")
     trainer = Trainer(args, generator, discriminator, inv_net, train_pose_params, val_pose_params,
                       optim_g, optim_d, optim_i, optim_t, optim_v,
