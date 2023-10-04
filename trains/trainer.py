@@ -529,7 +529,7 @@ class Trainer(object):
         depths = torch.cat(depths)
 
         rgbs = ((rgbs.cpu().permute(0, 2, 3, 1) / 2 + 0.5).numpy().clip(0, 1) * 255).astype(np.uint8)
-        rgbs = Image.fromarray(rgbs)
+        rgbs = Image.fromarray(rgbs).convert('RGB')
         imageio.mimwrite(os.path.join(self.video_dir, f'rgb_{self.it:04}.gif'), rgbs, duration=40)
 
         depths = (depths.cpu().permute(0, 2, 3, 1).numpy().clip(0, 1) * 255).astype(np.uint8)
