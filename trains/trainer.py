@@ -530,7 +530,7 @@ class Trainer(object):
         
         rgbs = rgbs.cpu().permute(0, 2, 3, 1).numpy()
         depths = depths.cpu().permute(0, 2, 3, 1).numpy()
-        depths = np.concatenate([depths, depths, depths], axis=-1)
+        depths = np.repeat(depths, repeats=3, axis=-1)
 
         rgbs = (255 * np.clip(rgbs, 0, 1)).astype(np.uint8)
         imageio.mimwrite(os.path.join(self.video_dir, f'rgb_{self.it:04}.gif'), rgbs, duration=40)
