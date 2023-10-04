@@ -23,7 +23,7 @@ def get_opts():
     parser.add_argument('--print_every', type=int, default=10)
     parser.add_argument('--sample_every', type=int, default=1000)
     parser.add_argument('--save_every', type=int, default=2000)
-    parser.add_argument('--video_every', type=int, default=100)
+    parser.add_argument('--video_every', type=int, default=10)
     parser.add_argument('--empty_cache_every', type=int, default=1000)
 
     # nerf
