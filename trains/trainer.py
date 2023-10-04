@@ -535,5 +535,5 @@ class Trainer(object):
         imageio.mimwrite(os.path.join(self.video_dir, f'rgb_{self.it:04}.gif'), rgbs, duration=40)
 
         depths = (255 * np.clip(depths, 0, 1)).astype(np.uint8)
-        #depths = (depths.cpu().permute(0, 2, 3, 1).numpy().clip(0, 1) * 255).astype(np.uint8)
+        print(depths.shape)
         imageio.mimwrite(os.path.join(self.video_dir, f'depth_{self.it:04}.gif'), depths, duration=40)
