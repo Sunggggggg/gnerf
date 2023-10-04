@@ -528,7 +528,7 @@ class Trainer(object):
         depths = torch.cat(depths)
 
         rgbs = ((rgbs.cpu().permute(0, 2, 3, 1) / 2 + 0.5).numpy().clip(0, 1) * 255).astype(np.uint8)
-        imageio.mimwrite(os.path.join(self.video_dir, f'rgb_{self.it:04}.gif'), rgbs, fps=24, quality=8)
+        imageio.mimwrite(os.path.join(self.video_dir, f'rgb_{self.it:04}.gif'), rgbs)
 
         depths = (depths.cpu().permute(0, 2, 3, 1).numpy().clip(0, 1) * 255).astype(np.uint8)
-        imageio.mimwrite(os.path.join(self.video_dir, f'depth_{self.it:04}.gif'), depths, fps=24, quality=8)
+        imageio.mimwrite(os.path.join(self.video_dir, f'depth_{self.it:04}.gif'), depths)
