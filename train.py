@@ -177,8 +177,8 @@ if __name__ == '__main__':
     # Parallel model
     if torch.cuda.is_available() and len(deviceIds) > 1:
         print("Data parallel models")
-        generator = nn.DataParallel(generator, device_ids=deviceIds).to(device)
-        discriminator = nn.DataParallel(discriminator, device_ids=deviceIds).to(device)
+        generator = nn.DataParallel(generator, device_ids=deviceIds).to(device).module
+        discriminator = nn.DataParallel(discriminator, device_ids=deviceIds).to(device).module
         inv_net = nn.DataParallel(inv_net, device_ids=deviceIds).to(device)
         train_pose_params = nn.DataParallel(train_pose_params, device_ids=deviceIds).to(device)
         val_pose_params = nn.DataParallel(val_pose_params, device_ids=deviceIds).to(device)
