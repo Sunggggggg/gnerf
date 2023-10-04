@@ -179,9 +179,9 @@ if __name__ == '__main__':
         print("Data parallel models")
         generator = nn.DataParallel(generator, device_ids=deviceIds).to(device).module
         discriminator = nn.DataParallel(discriminator, device_ids=deviceIds).to(device).module
-        inv_net = nn.DataParallel(inv_net, device_ids=deviceIds).to(device)
-        train_pose_params = nn.DataParallel(train_pose_params, device_ids=deviceIds).to(device)
-        val_pose_params = nn.DataParallel(val_pose_params, device_ids=deviceIds).to(device)
+        inv_net = nn.DataParallel(inv_net, device_ids=deviceIds).to(device).module
+        train_pose_params = nn.DataParallel(train_pose_params, device_ids=deviceIds).to(device).module
+        val_pose_params = nn.DataParallel(val_pose_params, device_ids=deviceIds).to(device).module
 
     print("Train start..!!!")
     trainer = Trainer(args, generator, discriminator, inv_net, train_pose_params, val_pose_params,
