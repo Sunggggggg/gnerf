@@ -18,9 +18,12 @@ from tools.patch_sampler import RescalePatchSampler, FlexPatchSampler, FullImage
 from tools.ray_sampler import RaySampler
 from tools.utils import count_trainable_parameters
 
-class myDataParallel(nn.DataParallel):
-    def __getattr__(self, name: str):
-        return getattr(self.module, name)    
+class MyDataParallel(nn.DataParallel):
+    def __getattr__(self, name):
+        if name == 'module':
+            return self._modules['module']
+        else:
+            return getattr(self.module, name)  
 
 def open_tensorboard(log_dir):
     p = subprocess.Popen(
