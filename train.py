@@ -18,7 +18,7 @@ from tools.patch_sampler import RescalePatchSampler, FlexPatchSampler, FullImage
 from tools.ray_sampler import RaySampler
 from tools.utils import count_trainable_parameters
 
-class MyDataParallel(nn.DataParallel):
+class myDataParallel(nn.DataParallel):
     def __getattr__(self, name):
         if name == 'module':
             return self._modules['module']
