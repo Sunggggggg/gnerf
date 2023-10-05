@@ -11,7 +11,7 @@ def get_opts():
     parser.add_argument('--name', type=str, default='GNeRF', help='name of the project')
 
     # training
-    parser.add_argument('--num_epoch', type=int, default=4000, help='number of training epochs')
+    parser.add_argument('--num_epoch', type=int, default=8000, help='number of training epochs')
     parser.add_argument('--num_workers', type=int, default=6, help='number of workers')
     parser.add_argument('--batch_size', type=int, default=12, help='batch size')
     parser.add_argument('--ckpt', type=str, default=None, help='pretrained checkpoint path to load')
