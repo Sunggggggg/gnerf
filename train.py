@@ -88,7 +88,8 @@ if __name__ == '__main__':
         torch.cuda.set_device(deviceIds[0])
         device = torch.device("cuda")
     else :
-        device = torch.device("cpu") 
+        device = torch.device("cpu")
+        
     current_time = datetime.today().strftime('%Y-%m-%d-%H-%M-%S')
     args.out_dir = os.path.join(args.out_dir, "training-runs", f"{args.name}-{current_time}")
 
@@ -183,13 +184,13 @@ if __name__ == '__main__':
         open_tensorboard(args.log_dir)
     
     # Parallel model
-    if torch.cuda.is_available() and len(deviceIds) > 1:
-        print("Data parallel models")
-        generator = myDataParallel(generator, device_ids=deviceIds).to(device)
-        discriminator = myDataParallel(discriminator, device_ids=deviceIds).to(device)
-        inv_net = myDataParallel(inv_net, device_ids=deviceIds).to(device)
-        train_pose_params = myDataParallel(train_pose_params, device_ids=deviceIds).to(device)
-        val_pose_params = myDataParallel(val_pose_params, device_ids=deviceIds).to(device)
+    # if torch.cuda.is_available() and len(deviceIds) > 1:
+    #     print("Data parallel models")
+    #     generator = myDataParallel(generator, device_ids=deviceIds).to(device)
+    #     discriminator = myDataParallel(discriminator, device_ids=deviceIds).to(device)
+    #     inv_net = myDataParallel(inv_net, device_ids=deviceIds).to(device)
+    #     train_pose_params = myDataParallel(train_pose_params, device_ids=deviceIds).to(device)
+    #     val_pose_params = myDataParallel(val_pose_params, device_ids=deviceIds).to(device)
 
     print("Train start..!!!")
 
